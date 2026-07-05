@@ -14,20 +14,14 @@ fi
 # APT: Core Dependencies & System/GUI Tools
 # ---------------------------------------------------------
 sudo apt-get update -qq
-sudo apt-get install -y -qq build-essential bubblewrap git curl gnupg ca-certificates fontconfig unzip >/dev/null
 
-run_step "apt:wl-clipboard" sudo apt-get install -y -qq wl-clipboard >/dev/null
-run_step "apt:xclip" sudo apt-get install -y -qq xclip >/dev/null
-run_step "apt:xsel" sudo apt-get install -y -qq xsel >/dev/null
-run_step "apt:ghostty" sudo apt-get install -y -qq ghostty >/dev/null
-run_step "apt:flameshot" sudo apt-get install -y -qq flameshot >/dev/null
-run_step "apt:meld" sudo apt-get install -y -qq meld >/dev/null
-run_step "apt:kdiff3" sudo apt-get install -y -qq kdiff3 >/dev/null
-run_step "apt:ffmpeg" sudo apt-get install -y -qq ffmpeg >/dev/null
-run_step "apt:zsh" sudo apt-get install -y -qq zsh >/dev/null
+APT_PACKAGES=(
+  build-essential bubblewrap git curl gnupg ca-certificates fontconfig unzip
+  wl-clipboard xclip xsel ghostty flameshot meld kdiff3 ffmpeg zsh
+  imagemagick poppler-utils tmux mc htop jq stow httpie 7zip
+)
 
-# Migrated from Homebrew
-run_step "apt:utils" sudo apt-get install -y -qq imagemagick poppler-utils tmux mc htop jq stow httpie 7zip >/dev/null
+run_step "Sys Packages (Bulk)" sudo apt-get install -y -qq "${APT_PACKAGES[@]}" >/dev/null
 
 # ---------------------------------------------------------
 # HOMEBREW: CLI Tools, Utilities, & Languages

@@ -14,20 +14,14 @@ fi
 # ZYPPER: Core Dependencies & System/GUI Tools
 # ---------------------------------------------------------
 sudo zypper -n refresh >/dev/null
-run_step "zypper:core_deps" sudo zypper -n install git curl gcc make fontconfig unzip gzip tar
 
-run_step "zypper:wl-clipboard" sudo zypper -n install wl-clipboard >/dev/null
-run_step "zypper:xclip" sudo zypper -n install xclip >/dev/null
-run_step "zypper:xsel" sudo zypper -n install xsel >/dev/null
-run_step "zypper:ghostty" sudo zypper -n install ghostty >/dev/null
-run_step "zypper:flameshot" sudo zypper -n install flameshot >/dev/null
-run_step "zypper:meld" sudo zypper -n install meld >/dev/null
-run_step "zypper:kdiff3" sudo zypper -n install kdiff3 >/dev/null
-run_step "zypper:ffmpeg" sudo zypper -n install ffmpeg >/dev/null
-run_step "zypper:zsh" sudo zypper -n install zsh >/dev/null
+ZYPPER_PACKAGES=(
+  git curl gcc make fontconfig unzip gzip tar
+  wl-clipboard xclip xsel ghostty flameshot meld kdiff3 ffmpeg zsh
+  ImageMagick poppler-tools tmux mc htop jq stow httpie 7zip
+)
 
-# Migrated from Homebrew
-run_step "zypper:utils" sudo zypper -n install ImageMagick poppler-tools tmux mc htop jq stow httpie 7zip >/dev/null
+run_step "Zypper Packages (Bulk)" sudo zypper -n install "${ZYPPER_PACKAGES[@]}" >/dev/null
 
 # ---------------------------------------------------------
 # HOMEBREW: CLI Tools, Utilities, & Languages

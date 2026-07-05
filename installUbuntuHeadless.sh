@@ -14,13 +14,13 @@ fi
 # APT: Core Dependencies & Additional Packages
 # ---------------------------------------------------------
 sudo apt-get update -qq
-sudo apt-get install -y -qq build-essential bubblewrap git curl gnupg ca-certificates unzip >/dev/null
 
-run_step "apt:ffmpeg" sudo apt-get install -y -qq ffmpeg >/dev/null
-run_step "apt:zsh" sudo apt-get install -y -qq zsh >/dev/null
+APT_PACKAGES=(
+  build-essential bubblewrap git curl gnupg ca-certificates unzip
+  ffmpeg zsh imagemagick poppler-utils tmux mc htop jq stow httpie 7zip
+)
 
-# Migrated from Homebrew
-run_step "apt:utils" sudo apt-get install -y -qq imagemagick poppler-utils tmux mc htop jq stow httpie 7zip >/dev/null
+run_step "Sys Packages (Bulk)" sudo apt-get install -y -qq "${APT_PACKAGES[@]}" >/dev/null
 
 # ---------------------------------------------------------
 # HOMEBREW: CLI Tools, Utilities, & Languages
