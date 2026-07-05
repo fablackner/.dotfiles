@@ -23,20 +23,35 @@ compdef _cd c
 # =============================================================================
 # ALIASES
 # =============================================================================
+# Core replacements
 alias cat="bat"
 alias ls="eza"
 alias ll="eza -alh"
+
+# Search & Preview
 alias fdd="fd --hidden --no-ignore"
 alias rgg="rg --hidden --no-ignore"
 alias fzp="fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
-alias sysupdate="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
-alias goto="cd -P"
-alias dots='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+
+# Package management
+alias sysupapt="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+alias sysup="sudo zypper refresh && sudo zypper update"
+alias sysclean="sudo zypper rm --clean-deps \$(sudo zypper packages --unneeded | awk '/^i/ {print \$5}')"
+
+# System & UI
+alias sk="sudo systemctl start keyd"
+alias sx="startx /usr/bin/startplasma-x11"
+alias sw="dbus-run-session startplasma-wayland"
+alias sm="kwin_wayland_wrapper --xwayland"
+
+# Utilities
+alias e="gedit"
+alias lg="lazygit"
+alias tt="gio trash"
+alias xc="xclip -selection clipboard"
 alias myvpn='sudo wg-quick up wg0'
 alias mc="COLORTERM=truecolor mc -S faybtheme"
-alias lg="lazygit"
 alias lzd="lazydocker"
-alias ht="htop"
 
 # =============================================================================
 # ENVIRONMENT & SETTINGS
