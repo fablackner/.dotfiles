@@ -28,6 +28,7 @@ floating=1
 panelLengthMode=2
 panelOpacity=0
 panelVisibility=1
+shell=org.kde.plasma.desktop
 
 [PlasmaViews][Panel 80][Defaults]
 maxLength=1440

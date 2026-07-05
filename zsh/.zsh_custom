@@ -1,0 +1,59 @@
+# =============================================================================
+# FUNCTIONS
+# =============================================================================
+y() {
+  local tmp cwd
+  tmp="$(mktemp -t yazi-cwd.XXXXXX)"
+  yazi "$@" --cwd-file="$tmp"
+  if cwd="$(cat -- "$tmp")" && [[ -n "$cwd" && "$cwd" != "$PWD" ]]; then
+    builtin cd -- "$cwd"
+  fi
+  rm -f -- "$tmp"
+}
+
+c() {
+    if [ -f "$1" ]; then
+        builtin cd "$(dirname "$1")" && ls
+    else
+        builtin cd -P "$1" && ls
+    fi
+}
+compdef _cd c
+
+# =============================================================================
+# ALIASES
+# =============================================================================
+alias cat="bat"
+alias ls="eza"
+alias ll="eza -alh"
+alias fdd="fd --hidden --no-ignore"
+alias rgg="rg --hidden --no-ignore"
+alias fzp="fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
+alias sysupdate="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
+alias goto="cd -P"
+alias dots='/usr/bin/git --git-dir=$HOME/.dots/ --work-tree=$HOME'
+alias myvpn='sudo wg-quick up wg0'
+alias mc="COLORTERM=truecolor mc -S faybtheme"
+alias lg="lazygit"
+alias lzd="lazydocker"
+alias ht="htop"
+
+# =============================================================================
+# ENVIRONMENT & SETTINGS
+# =============================================================================
+export EDITOR='nvim'
+
+if [[ -d "$HOME/.bookmarks" ]]; then
+    export CDPATH=".:$HOME/.bookmarks:/"
+fi
+
+export FZF_DEFAULT_OPTS="--preview '([[ -f {} ]] && (bat --style=numbers --color=always {} || cat {})) || ([[ -d {} ]] && (tree -C {} | less)) || echo {} 2> /dev/null | head -200'"
+export FZF_DEFAULT_COMMAND="fd --hidden --no-ignore"
+export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+export FZF_ALT_C_COMMAND="fd -t d --no-ignore"
+export FZF_CTRL_R_OPTS="--preview 'echo {}' --preview-window down:3:hidden:wrap --bind '?:toggle-preview'"
+export FZF_TMUX=1
+
+set -o menucomplete
+bindkey -M menuselect '^[[1;5C' forward-char
+bindkey -M menuselect '^[[1;5D' backward-char
