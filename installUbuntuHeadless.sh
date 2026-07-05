@@ -10,8 +10,6 @@ if [[ "${EUID}" -eq 0 ]]; then
   exit 1
 fi
 
-
-
 # ---------------------------------------------------------
 # APT: Core Dependencies & Additional Packages
 # ---------------------------------------------------------
@@ -21,15 +19,17 @@ sudo apt-get install -y -qq build-essential bubblewrap git curl gnupg ca-certifi
 run_step "apt:ffmpeg" sudo apt-get install -y -qq ffmpeg >/dev/null
 run_step "apt:zsh" sudo apt-get install -y -qq zsh >/dev/null
 
+# Migrated from Homebrew
+run_step "apt:utils" sudo apt-get install -y -qq imagemagick poppler-utils tmux mc htop jq stow httpie 7zip >/dev/null
+
 # ---------------------------------------------------------
 # HOMEBREW: CLI Tools, Utilities, & Languages
 # ---------------------------------------------------------
 run_step "Homebrew System" install_homebrew
 
 BREW_PACKAGES=(
-  bat btop duf dust eza fd fzf gh htop httpie imagemagick jq
-  lazydocker lazygit midnight-commander neovim poppler resvg ripgrep
-  sevenzip starship stow tmux yazi zellij zoxide
+  bat btop duf dust eza fd fzf gh lazydocker lazygit
+  neovim resvg ripgrep starship yazi zellij zoxide
 )
 
 run_step "Brew Packages (Bulk)" /home/linuxbrew/.linuxbrew/bin/brew install -q "${BREW_PACKAGES[@]}"

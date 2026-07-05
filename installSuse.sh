@@ -10,8 +10,6 @@ if [[ "${EUID}" -eq 0 ]]; then
   exit 1
 fi
 
-
-
 # ---------------------------------------------------------
 # ZYPPER: Core Dependencies & System/GUI Tools
 # ---------------------------------------------------------
@@ -28,15 +26,17 @@ run_step "zypper:kdiff3" sudo zypper -n install kdiff3 >/dev/null
 run_step "zypper:ffmpeg" sudo zypper -n install ffmpeg >/dev/null
 run_step "zypper:zsh" sudo zypper -n install zsh >/dev/null
 
+# Migrated from Homebrew
+run_step "zypper:utils" sudo zypper -n install ImageMagick poppler-tools tmux mc htop jq stow httpie 7zip >/dev/null
+
 # ---------------------------------------------------------
 # HOMEBREW: CLI Tools, Utilities, & Languages
 # ---------------------------------------------------------
 run_step "Homebrew System" install_homebrew
 
 BREW_PACKAGES=(
-  bat btop duf dust eza fd fzf gh htop httpie imagemagick jq
-  lazydocker lazygit midnight-commander neovim poppler resvg ripgrep
-  sevenzip starship stow tmux yazi zellij zoxide
+  bat btop duf dust eza fd fzf gh lazydocker lazygit
+  neovim resvg ripgrep starship yazi zellij zoxide
 )
 
 run_step "Brew Packages (Bulk)" /home/linuxbrew/.linuxbrew/bin/brew install -q "${BREW_PACKAGES[@]}"
