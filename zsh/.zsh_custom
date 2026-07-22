@@ -37,6 +37,11 @@ alias fzp="fzf --preview '([[ -f {} ]] && (bat --style=numbers --color=always {}
 alias sysupapt="sudo apt update && sudo apt upgrade -y && sudo apt autoremove -y"
 alias sysup="sudo zypper refresh && sudo zypper update"
 alias sysclean="sudo zypper rm --clean-deps \$(sudo zypper packages --unneeded | awk '/^i/ {print \$5}')"
+alias bunup="bun update -g"
+alias uvup="uv tool upgrade --all"
+alias cargoup="cargo install-update -a"
+alias brewup="brew update && brew upgrade"
+# toolsup is a standalone script: bin/.local/bin/toolsup
 
 # System & UI
 alias sk="sudo systemctl start keyd"
@@ -52,6 +57,10 @@ alias xc="xclip -selection clipboard"
 alias myvpn='sudo wg-quick up wg0'
 alias mc="COLORTERM=truecolor mc -S faybtheme"
 alias lzd="lazydocker"
+
+# Synchronization
+alias pullvault="cd ~/DriveSyncFiles && rclone copy gdrive:DriveSyncFiles . --update --verbose --exclude '.obsidian/workspace.json' --exclude '.obsidian/workspace-mobile.json' --exclude '.obsidian/cache/**' --exclude '.trash/**'"
+alias pushvault="cd ~/DriveSyncFiles && rclone copy . gdrive:DriveSyncFiles --update --verbose --exclude '.obsidian/workspace.json' --exclude '.obsidian/workspace-mobile.json' --exclude '.obsidian/cache/**' --exclude '.trash/**'"
 
 # =============================================================================
 # ENVIRONMENT & SETTINGS

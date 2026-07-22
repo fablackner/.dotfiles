@@ -4,8 +4,6 @@
   // ==========================================
   "editor.fontFamily": "JetBrainsMono NF",
   "editor.fontLigatures": true,
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
   "editor.formatOnType": true,
   "editor.minimap.enabled": false,
   "editor.quickSuggestions": {
@@ -90,11 +88,13 @@
     "editor.codeActionsOnSave": {
       "source.fixAll": "explicit",
       "source.organizeImports": "explicit"
-    }
+    },
+    "editor.formatOnType": true,
+    "editor.inlineSuggest.experimental.emptyResponseInformation": true
   },
   "github.copilot.nextEditSuggestions.enabled": false,
   "famakctl.distance": 3,
   "famakctl.offset": 10,
   "famakctl.scrollDistance": 20,
-  "kineticScroll.initialStepLines": 1
+  "editor.formatOnSave": true
 }

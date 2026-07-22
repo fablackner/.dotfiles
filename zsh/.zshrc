@@ -67,6 +67,10 @@ command -v starship >/dev/null 2>&1 && eval "$(starship init zsh)"
 if [[ -f "$HOME/.zsh_custom" ]]; then
     source "$HOME/.zsh_custom"
 fi
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Automatically remove duplicates from PATH
+typeset -U path
 
-export PATH="/home/fabian/.local/bin:$PATH"
+# Android SDK (command-line builds, no Android Studio)
+export ANDROID_HOME="$HOME/Android/Sdk"
+export JAVA_HOME="/usr/lib64/jvm/java-21-openjdk-21"
+export PATH="$ANDROID_HOME/platform-tools:$ANDROID_HOME/cmdline-tools/latest/bin:$HOME/Android/gradle-8.14.3/bin:$PATH"
