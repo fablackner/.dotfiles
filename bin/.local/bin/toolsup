@@ -26,7 +26,7 @@ run_self_updaters() {
     local cmd
     # omz is a shell function, not a binary, so drive its script directly.
     for cmd in \
-        "brew update && brew upgrade" \
+        "brew update && brew upgrade -y" \
         "bun upgrade && bun update -g" \
         "uv self update && uv tool upgrade --all" \
         "rustup update && cargo install-update -a" \
@@ -73,15 +73,21 @@ run_git_plugins() {
 }
 
 # -----------------------------------------------------------------------------
-# Quarto ships as a tarball. /opt/quarto is user-owned, so no sudo needed.
+# Quarto ships as a tarball. It lives under ~/.local/opt with a symlink into
+# ~/.local/bin: /opt needs root to write, and none of this warrants sudo.
 # -----------------------------------------------------------------------------
 run_quarto() {
     step "quarto"
-    local latest current tmp extracted
-    latest=$(curl -fsSL \
-        "https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest" \
-        | grep -m1 '"tag_name"' | grep -oE '[0-9]+\.[0-9]+\.[0-9]+')
-    current=$(quarto --version 2>/dev/null)
+    local latest current tmp release prefix
+    local -a extracted
+    prefix="$HOME/.local/opt/quarto"
+    # Read the API response into a variable first: piping it straight into a
+    # short-circuiting filter kills curl with a write error mid-transfer.
+    release=$(curl -fsSL \
+        "https://api.github.com/repos/quarto-dev/quarto-cli/releases/latest")
+    latest=$(print -r -- "$release" | grep '"tag_name"' \
+        | grep -oE '[0-9]+\.[0-9]+\.[0-9]+' | head -1)
+    current=$("$prefix/bin/quarto" --version 2>/dev/null)
     [[ -n $latest ]] || { fail "could not read latest release"; return 1 }
     [[ $latest == $current ]] && { skip "quarto $current already current"; return 0 }
 
@@ -92,10 +98,12 @@ run_quarto() {
     then
         extracted=("$tmp"/quarto-*(N/))
         # Swap only once the new tree is verified on disk, so a failed
-        # download can never leave /opt/quarto missing.
+        # download can never leave the install missing.
         if [[ -n ${extracted[1]:-} && -x ${extracted[1]}/bin/quarto ]]; then
-            rm -rf /opt/quarto && mv "${extracted[1]}" /opt/quarto \
-                && ok "quarto $current -> $latest" \
+            mkdir -p "${prefix:h}" \
+                && rm -rf "$prefix" && mv "${extracted[1]}" "$prefix" \
+                && ln -sfn "$prefix/bin/quarto" "$local_bin/quarto" \
+                && ok "quarto ${current:-none} -> $latest" \
                 || fail "failed to install quarto $latest"
         else
             fail "downloaded quarto $latest looks broken, keeping $current"

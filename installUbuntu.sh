@@ -29,7 +29,7 @@ run_step "Sys Packages (Bulk)" sudo apt-get install -y -qq "${APT_PACKAGES[@]}" 
 run_step "Homebrew System" install_homebrew
 
 BREW_PACKAGES=(
-  bat btop duf dust eza fd fzf gh lazydocker lazygit
+  bat btop duf dust eza fd fzf gh glow lazydocker lazygit
   neovim resvg ripgrep starship yazi zellij zoxide
 )
 

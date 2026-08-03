@@ -1,0 +1,5 @@
+#:schema https://yazi-rs.github.io/schemas/theme.json
+
+[mode]
+normal_main = { fg = "#211421", bg = "#f9db2d", bold = true }
+normal_alt  = { fg = "#f9db2d", bg = "#211421" }

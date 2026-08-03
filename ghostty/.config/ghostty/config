@@ -1,2 +1,4 @@
 theme = faybtheme
 background-opacity = 0.85
+font-family = JetBrainsMono NFM
+font-size = 13

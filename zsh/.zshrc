@@ -36,8 +36,14 @@ source $ZSH/oh-my-zsh.sh
 # DEV ENVIRONMENTS & SOURCING
 # =============================================================================
 # >>> juliaup initialize >>>
+
+# !! Contents within this block are managed by juliaup !!
+
 path=('/home/fabian/.juliaup/bin' $path)
 export PATH
+# Tab completion for juliaup and julia channel selection
+[ -f "/home/fabian/.julia/juliaup/completions/zsh.zsh" ] && source "/home/fabian/.julia/juliaup/completions/zsh.zsh"
+
 # <<< juliaup initialize <<<
 
 [[ -r "$HOME/.local/bin/env" ]] && source "$HOME/.local/bin/env"
