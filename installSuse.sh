@@ -45,6 +45,7 @@ fi
 ensure_path_in_file "$HOME/.zshrc" "$HOME/.local/bin"
 ensure_path_in_file "$HOME/.bashrc" "$HOME/.local/bin"
 
+run_step "Kitty" install_kitty
 run_step "JetBrainsMono Nerd Font" install_jetbrainsmono
 
 run_step "Oh-My-Zsh (Core)" sync_repo "$HOME/.oh-my-zsh" "https://github.com/ohmyzsh/ohmyzsh.git"

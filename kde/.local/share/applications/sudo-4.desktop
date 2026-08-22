@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=sudo systemctl stop keyd
+Name=sudo systemctl stop keyd
+NoDisplay=true
+StartupNotify=false
+Type=Application
+X-KDE-GlobalAccel-CommandShortcut=true

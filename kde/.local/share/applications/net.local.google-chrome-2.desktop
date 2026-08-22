@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/bin/sh -c "google-chrome --new-window https://doc.new && sleep 4 && xdotool key ctrl+shift+s"
+Name=startVoice
+NoDisplay=true
+StartupNotify=false
+Type=Application
+X-KDE-GlobalAccel-CommandShortcut=true

@@ -314,14 +314,20 @@ _launch=Meta+!
 [services][net.local.flameshot.desktop]
 _launch=Ctrl+Alt+H
 
-[services][net.local.ghostty.desktop]
-_launch=Meta+§
-
 [services][net.local.google-chrome-2.desktop]
 _launch=Meta+Ö
 
+[services][net.local.google-chrome-3.desktop]
+_launch=Meta+)
+
 [services][net.local.google-chrome.desktop]
 _launch=Meta+%
+
+[services][net.local.kitty-2.desktop]
+_launch=Meta+$
+
+[services][net.local.kitty.desktop]
+_launch=Meta+§
 
 [services][org.kde.dolphin.desktop]
 _launch=Meta+&

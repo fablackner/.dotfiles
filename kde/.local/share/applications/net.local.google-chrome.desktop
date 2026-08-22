@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=google-chrome --new-window https://claude.ai/new
+Name=claude
+NoDisplay=true
+StartupNotify=false
+Type=Application
+X-KDE-GlobalAccel-CommandShortcut=true

@@ -1,6 +1,6 @@
 # .dotfiles
 
-Neovim is installed from the official pre-built Linux archive. JetBrainsMono Nerd Font is downloaded automatically from the Nerd Fonts v3.4.0 release archive by the installer scripts.
+Neovim and Kitty are installed from their official pre-built Linux archives. Kitty is installed per-user in `~/.local/kitty.app`. JetBrainsMono Nerd Font is downloaded automatically from the Nerd Fonts v3.4.0 release archive by the installer scripts.
 
 ## Tools Included
 
@@ -30,7 +30,9 @@ The installer includes a comprehensive set of modern CLI tools:
 - duf - Disk usage/free utility
 - dust - Disk usage visualization
 
-**Terminal Multiplexing and Environment:**
+**Terminal Emulators, Multiplexing, and Environment:**
+- Ghostty - GPU-accelerated terminal emulator
+- Kitty - GPU-accelerated terminal emulator
 - tmux - Terminal multiplexer
 - zellij - Modern tmux alternative
 - starship - Customizable shell prompt

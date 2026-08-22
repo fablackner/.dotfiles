@@ -38,6 +38,7 @@ run_self_updaters() {
         "codex update" \
         "copilot update" \
         "agy update" \
+        "curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin launch=n" \
         "curl -fsSL https://zed.dev/install.sh | sh"
     do
         step "$cmd"

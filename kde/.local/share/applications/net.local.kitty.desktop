@@ -1,0 +1,7 @@
+[Desktop Entry]
+Exec=/home/fabian/.local/kitty.app/bin/kitty tmux new-session -A -s main
+Name=term start
+NoDisplay=true
+StartupNotify=false
+Type=Application
+X-KDE-GlobalAccel-CommandShortcut=true

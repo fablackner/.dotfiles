@@ -58,6 +58,24 @@ ensure_path_in_file() {
   grep -Fq "$2" "$1" || printf '\nexport PATH="%s:$PATH"\n' "$2" >> "$1"
 }
 
+install_kitty() {
+  local kitty_dir="$HOME/.local/kitty.app"
+  local local_bin_dir="$HOME/.local/bin"
+  local applications_dir="$HOME/.local/share/applications"
+  local desktop_file="$applications_dir/kitty.desktop"
+
+  curl -fsSL https://sw.kovidgoyal.net/kitty/installer.sh \
+    | sh /dev/stdin launch=n || return
+
+  mkdir -p "$local_bin_dir" "$applications_dir" || return
+  ln -sf "$kitty_dir/bin/kitty" "$kitty_dir/bin/kitten" "$local_bin_dir/" || return
+  cp "$kitty_dir/share/applications/kitty.desktop" "$desktop_file" || return
+  sed -i \
+    -e "s|Icon=kitty|Icon=$kitty_dir/share/icons/hicolor/256x256/apps/kitty.png|g" \
+    -e "s|Exec=kitty|Exec=$kitty_dir/bin/kitty|g" \
+    "$desktop_file"
+}
+
 install_jetbrainsmono() {
   local temp_dir archive_path
   temp_dir="$(mktemp -d)"

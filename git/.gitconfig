@@ -1,3 +1,10 @@
+[user]
+    name = fablackner
+    email = 35771682+fablackner@users.noreply.github.com
+
+[init]
+    defaultBranch = main
+
 [alias]
     # The Essentials
     st = status
@@ -5,15 +12,12 @@
     ci = commit
     br = branch
     df = diff
-
     # Diff / Merge shortcuts
     dt = difftool
     mt = mergetool
-
     # Utilities
     unstage = reset HEAD --
     last = log -1 HEAD
-
     # Pretty Log (A graph view of your history)
     lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 
@@ -25,37 +29,35 @@
 
 [delta]
     navigate = true
+    side-by-side = true
+    line-numbers = true
 
 [diff]
     tool = meld
     colorMoved = default
+    algorithm = histogram
 
 [difftool]
     prompt = false
 
-[difftool "meld"]
-    cmd = meld "$LOCAL" "$REMOTE"
-
 [merge]
     tool = kdiff3
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 
 [mergetool]
     prompt = false
 
-[mergetool "kdiff3"]
-    cmd = kdiff3 "$LOCAL" "$REMOTE" "$BASE" -o "$MERGED"
-    trustExitCode = true
+[rerere]
+    enabled = true
+
+[push]
+    autoSetupRemote = true
+
+[fetch]
+    prune = true
 
 [filter "lfs"]
     clean = git-lfs clean -- %f
     smudge = git-lfs smudge -- %f
     process = git-lfs filter-process
     required = true
-
-[user]
-	name = fablackner
-	email = 35771682+fablackner@users.noreply.github.com
-
-[init]
-    defaultBranch = main
