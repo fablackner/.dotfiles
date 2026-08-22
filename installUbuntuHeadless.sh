@@ -41,6 +41,11 @@ fi
 # ---------------------------------------------------------
 # CONFIGURATION & DOTFILES
 # ---------------------------------------------------------
+ensure_path_in_file "$HOME/.zshrc" "$HOME/.local/bin"
+ensure_path_in_file "$HOME/.bashrc" "$HOME/.local/bin"
+
+run_step "uv" install_uv
+run_step "Bun" install_bun
 
 run_step "Oh-My-Zsh (Core)" sync_repo "$HOME/.oh-my-zsh" "https://github.com/ohmyzsh/ohmyzsh.git"
 

@@ -58,6 +58,29 @@ ensure_path_in_file() {
   grep -Fq "$2" "$1" || printf '\nexport PATH="%s:$PATH"\n' "$2" >> "$1"
 }
 
+install_uv() {
+  local uv_install_dir="$HOME/.local/bin"
+
+  if [[ -x "$uv_install_dir/uv" && -x "$uv_install_dir/uvx" ]]; then
+    return 0
+  fi
+
+  mkdir -p "$uv_install_dir" || return
+  curl -LsSf https://astral.sh/uv/install.sh \
+    | env UV_INSTALL_DIR="$uv_install_dir" UV_NO_MODIFY_PATH=1 sh
+}
+
+install_bun() {
+  local bun_install_dir="$HOME/.bun"
+
+  if [[ ! -x "$bun_install_dir/bin/bun" ]]; then
+    curl -fsSL https://bun.com/install | bash || return
+  fi
+
+  export BUN_INSTALL="$bun_install_dir"
+  export PATH="$BUN_INSTALL/bin:$PATH"
+}
+
 install_kitty() {
   local kitty_dir="$HOME/.local/kitty.app"
   local local_bin_dir="$HOME/.local/bin"
