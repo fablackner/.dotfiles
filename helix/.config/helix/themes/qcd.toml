@@ -1,0 +1,183 @@
+# QCD Theme, ported from ~/projects/vscodeProjects/vscode-qcd-theme/themes/qcd.json.
+# https://github.com/fablackner/vscode-qcd-theme
+# Helix scopes: https://docs.helix-editor.com/themes.html
+# Tree-sitter scopes do not expose all VS Code semantic modifiers or language overrides.
+
+# Syntax highlighting.
+"comment" = "comment"
+"constant" = "constant"
+"constant.builtin" = "constant"
+"constant.numeric" = "constant"
+"constant.character" = "string"
+"constant.character.escape" = "constant"
+"string" = "string"
+"string.regexp" = "string"
+"string.special" = "string"
+"string.special.url" = { fg = "link", underline = { style = "line" } }
+
+"keyword" = "keyword"
+"keyword.operator" = "keyword"
+"keyword.directive" = "directive"
+"keyword.storage" = "keyword"
+"keyword.storage.type" = "keyword"
+"keyword.storage.modifier" = "keyword"
+"operator" = "keyword"
+"punctuation" = "fg"
+"punctuation.special" = "constant"
+
+"function" = "function"
+"function.builtin" = "function"
+"function.method" = "function"
+"function.macro" = "constant"
+"function.special" = "constant"
+"type" = "type"
+"type.builtin" = "type"
+"type.parameter" = "type_parameter"
+"type.enum.variant" = "constant"
+"constructor" = "type"
+"namespace" = "namespace"
+"variable" = "variable"
+"variable.builtin" = "variable"
+"variable.parameter" = "parameter"
+"variable.other.member" = "property"
+"attribute" = "property"
+"label" = "label"
+"tag" = "keyword"
+"special" = "constant"
+
+# Markup and diffs; gutter colors follow the VS Code editor gutter.
+"markup.heading" = { fg = "label", modifiers = ["bold"] }
+"markup.list" = "keyword"
+"markup.list.checked" = "git_add"
+"markup.list.unchecked" = "comment"
+"markup.bold" = { fg = "string", modifiers = ["bold"] }
+"markup.italic" = { fg = "string", modifiers = ["italic"] }
+"markup.strikethrough" = { fg = "comment", modifiers = ["crossed_out"] }
+"markup.link" = { fg = "parameter", underline = { style = "line" } }
+"markup.link.url" = { fg = "link", underline = { style = "line" } }
+"markup.link.label" = "parameter"
+"markup.link.text" = "parameter"
+"markup.quote" = "quote"
+"markup.raw" = "code"
+"markup.raw.inline" = { fg = "code", bg = "panel" }
+"diff.plus" = "inserted"
+"diff.minus" = "deleted"
+"diff.delta" = "changed"
+"diff.delta.conflict" = "warning"
+"diff.plus.gutter" = "git_add"
+"diff.minus.gutter" = "error"
+"diff.delta.gutter" = "warning"
+
+# Editor, cursor, and selections.
+"ui.background" = { bg = "bg" }
+"ui.background.separator" = "border"
+"ui.text" = "fg"
+"ui.text.focus" = { fg = "accent", bg = "line" }
+"ui.text.inactive" = "fg"
+"ui.text.info" = "fg"
+"ui.text.directory" = "namespace"
+"ui.cursor" = { fg = "bg", bg = "accent" }
+"ui.cursor.primary" = { fg = "bg", bg = "accent" }
+"ui.cursor.match" = { fg = "accent", bg = "widget" }
+"ui.selection" = { bg = "line" }
+"ui.selection.primary" = { bg = "selection" }
+"ui.cursorline.primary" = { bg = "line" }
+"ui.cursorline.secondary" = { bg = "line" }
+"ui.cursorcolumn.primary" = { bg = "line" }
+"ui.cursorcolumn.secondary" = { bg = "line" }
+"ui.gutter" = { bg = "panel" }
+"ui.gutter.selected" = { bg = "line" }
+"ui.linenr" = "fg"
+"ui.linenr.selected" = "accent"
+"ui.window" = "border"
+"ui.highlight" = { bg = "search" }
+"ui.highlight.frameline" = { bg = "panel" }
+"ui.debug.breakpoint" = "error"
+"ui.debug.active" = "accent"
+
+# Status bar and tabs.
+"ui.statusline" = { fg = "fg", bg = "widget" }
+"ui.statusline.inactive" = { fg = "fg", bg = "widget" }
+"ui.statusline.normal" = { fg = "panel", bg = "accent", modifiers = ["bold"] }
+"ui.statusline.insert" = { fg = "panel", bg = "git_add", modifiers = ["bold"] }
+"ui.statusline.select" = { fg = "panel", bg = "property", modifiers = ["bold"] }
+"ui.statusline.separator" = "border"
+"ui.bufferline" = { fg = "fg", bg = "widget" }
+"ui.bufferline.active" = { fg = "accent", bg = "panel" }
+"ui.bufferline.background" = { bg = "widget" }
+
+# Pickers, hover documentation, and completion menus.
+"ui.popup" = { fg = "fg", bg = "menu" }
+"ui.popup.info" = { fg = "fg", bg = "panel" }
+"ui.help" = { fg = "fg", bg = "panel" }
+"ui.menu" = { fg = "fg", bg = "menu" }
+"ui.menu.selected" = { fg = "accent", bg = "panel" }
+"ui.menu.scroll" = { fg = "fg", bg = "widget" }
+"ui.picker.header" = { fg = "fg", bg = "panel" }
+"ui.picker.header.column" = "fg"
+"ui.picker.header.column.active" = "accent"
+"markup.normal.completion" = "fg"
+"markup.normal.hover" = "fg"
+
+# Virtual text and diagnostics.
+"ui.virtual" = "hint"
+"ui.virtual.ruler" = { bg = "panel" }
+"ui.virtual.whitespace" = "fg"
+"ui.virtual.indent-guide" = "panel"
+"ui.virtual.inlay-hint" = "hint"
+"ui.virtual.inlay-hint.parameter" = "hint"
+"ui.virtual.inlay-hint.type" = "hint"
+"ui.virtual.wrap" = "comment"
+"ui.virtual.jump-label" = { fg = "accent", modifiers = ["bold"] }
+"warning" = "warning"
+"error" = "error"
+"info" = "info"
+"hint" = "hint"
+"diagnostic" = { underline = { color = "error", style = "curl" } }
+"diagnostic.error" = { underline = { color = "error", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "warning", style = "curl" } }
+"diagnostic.info" = { underline = { color = "info", style = "curl" } }
+"diagnostic.hint" = { underline = { color = "hint", style = "curl" } }
+"diagnostic.unnecessary" = { modifiers = ["dim"] }
+"diagnostic.deprecated" = { modifiers = ["crossed_out"] }
+"tabstop" = { bg = "tabstop" }
+
+[palette]
+bg = "#1e181e"
+fg = "#c3c0b5"
+panel = "#211421"
+widget = "#141014"
+line = "#211925"
+selection = "#56036b"
+menu = "#003f2f"
+border = "#000000"
+accent = "#fce566"
+search = "#4b6153"
+# VS Code's #6943ff62 snippet highlight composited over the editor background.
+tabstop = "#3b2974"
+
+comment = "#8b8772"
+string = "#ced87f"
+keyword = "#ff0080"
+function = "#54fe50"
+variable = "#ff8040"
+type = "#fef93a"
+type_parameter = "#fe9732"
+property = "#8d81fe"
+parameter = "#57e6ff"
+constant = "#fe61fa"
+namespace = "#b7b7db"
+label = "#ba55d3"
+directive = "#a38c26"
+quote = "#d2b48c"
+code = "#8fbc8f"
+link = "#1e90ff"
+inserted = "#adff2f"
+deleted = "#dc143c"
+changed = "#ffd700"
+
+error = "#fc618d"
+warning = "#fd9353"
+info = "#5ad4e6"
+hint = "#4f4f4f"
+git_add = "#7bd88f"

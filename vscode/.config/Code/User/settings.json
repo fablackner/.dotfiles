@@ -96,5 +96,8 @@
   "famakctl.distance": 3,
   "famakctl.offset": 10,
   "famakctl.scrollDistance": 20,
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "redhat.telemetry.enabled": false,
+  "claudeCode.preferredLocation": "panel",
+  "claudeCode.hideOnboarding": true
 }
