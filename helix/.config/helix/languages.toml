@@ -1,0 +1,11 @@
+[language-server.fortls]
+command = "fortls"
+args = ["--lowercase_intrinsics", "--hover_signature", "--hover_language=fortran", "--use_signature_help"]
+timeout = 60
+
+[[language]]
+name = "fortran"
+file-types = ["f", "for", "f77", "f90", "f95", "f03", "f08", "fpp", "F", "FOR", "F77", "F90", "F95", "F03", "F08", "FPP"]
+# Resolve imports across the project even when opening a file from app/ or src/.
+roots = [".fortls", ".fortlsrc", ".fortls.json", "fpm.toml", ".git"]
+language-servers = ["fortls"]
