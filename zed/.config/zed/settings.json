@@ -1,0 +1,56 @@
+// Zed settings
+//
+// For information on how to configure Zed, see the Zed
+// documentation: https://zed.dev/docs/configuring-zed
+//
+// To see all of Zed's default settings without changing your
+// custom settings, run `zed: open default settings` from the
+// command palette (cmd-shift-p / ctrl-shift-p)
+{
+  "collaboration_panel": {
+    "dock": "left"
+  },
+  "debugger": {
+    "dock": "left"
+  },
+  "git_panel": {
+    "dock": "left"
+  },
+  "project_panel": {
+    "dock": "left"
+  },
+  "diff_view_style": "split",
+  "ui_font_size": 16,
+  "buffer_font_size": 15,
+  "theme": {
+    "mode": "system",
+    "light": "Ayu Light",
+    "dark": "QCD Theme",
+  },
+  // QCD relies on LSP semantic tokens layered over tree-sitter highlighting.
+  "semantic_tokens": "combined",
+  "global_lsp_settings": {
+    // Earlier rules take precedence and layer over Zed's defaults. These mirror
+    // QCD's semanticTokenColors: every variable is orange (VS Code ignores
+    // readonly/constant there), globals are italic red, declarations are bold.
+    "semantic_token_rules": [
+      {
+        "token_type": "variable",
+        "token_modifiers": ["global"],
+        "style": ["variable.global"],
+      },
+      {
+        "token_type": "variable",
+        "style": ["variable"],
+      },
+      {
+        "token_modifiers": ["declaration"],
+        "font_weight": "bold",
+      },
+      {
+        "token_modifiers": ["definition"],
+        "font_weight": "bold",
+      },
+    ],
+  },
+}

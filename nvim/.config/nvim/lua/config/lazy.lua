@@ -24,6 +24,8 @@ require("lazy").setup({
     version = false,
   },
   checker = { enabled = true },
+  -- No plugin needs luarocks; skip the hererocks setup and its health errors.
+  rocks = { enabled = false },
   performance = {
     rtp = {
       disabled_plugins = {

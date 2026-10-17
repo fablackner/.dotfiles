@@ -1,0 +1,25 @@
+# Lazygit theme matching faybtheme / QCD
+gui:
+  theme:
+    activeBorderColor:
+      - '#54fe50'
+      - bold
+    inactiveBorderColor:
+      - '#494949'
+    optionsTextColor:
+      - '#57e6ff'
+    selectedLineBgColor:
+      - '#56036b'
+    selectedRangeBgColor:
+      - '#56036b'
+    cherryPickedCommitBgColor:
+      - '#211421'
+    cherryPickedCommitFgColor:
+      - '#fe61fa'
+    unstagedChangesColor:
+      - '#fc618d'
+    defaultFgColor:
+      - '#c3c0b5'
+    searchingActiveBorderColor:
+      - '#fef93a'
+      - bold

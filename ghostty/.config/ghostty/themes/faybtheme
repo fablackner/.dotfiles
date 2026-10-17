@@ -1,0 +1,22 @@
+window-colorspace = srgb
+palette = 0= #211421
+palette = 1= #fc618d
+palette = 2= #10aa31
+palette = 3= #f9db2d
+palette = 4= #948ae3
+palette = 5= #ba55d3
+palette = 6= #5ad4e6
+palette = 7= #c3c0b5
+palette = 8= #494949
+palette = 9= #ff0080
+palette = 10= #f2fe50
+palette = 11= #fef93a
+palette = 12= #8d81fe
+palette = 13= #fe61fa
+palette = 14= #57e6ff
+palette = 15= #ffffff
+background = #1e181e
+foreground = #54fe50
+cursor-color = #fef93a
+selection-background = #56036b
+selection-foreground = #ffffff

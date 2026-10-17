@@ -1,0 +1,8 @@
+[Unit]
+Description=restic backup of home to Google Drive
+
+[Service]
+Type=oneshot
+ExecStart=%h/.local/bin/restic-backup
+Nice=19
+IOSchedulingClass=idle

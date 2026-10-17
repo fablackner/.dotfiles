@@ -1,8 +1,102 @@
+#:schema https://yazi-rs.github.io/schemas/keymap.json
+
+# Navigation lives on c/s/r/t (up/down/left/right) instead of k/j/h/l.
+# The commands those four keys had by default moved onto the vim key they replaced:
+#   k -> copy prefix    j -> search (fd)    h -> rename    l -> tab prefix
+#
+# The shift layer follows the same swap, so nothing stays on a vim position:
+#   C/S -> seek preview up/down (was K/J)    R/T -> history back/forward (was H/L)
+#   J   -> search by content, rg (was S)     K/H/L are disabled
+#
+# The input line ([input]) is left untouched, so c/s/r keep their vim meaning there.
+
 [mgr]
 prepend_keymap = [
-  { on = "h", run = "noop", desc = "Disable default leave on h" },
-  { on = "l", run = "noop", desc = "Disable default enter on l" },
-  { on = "<C-Left>", run = "leave", desc = "Leave the current directory" },
-  { on = "<C-Right>", run = "enter", desc = "Enter hovered directory" },
-  { on = "<C-t>", run = "tab_create --current", desc = "Create a new tab" },
+  # Movement
+  { on = "c", run = "arrow prev", desc = "Previous file" },
+  { on = "s", run = "arrow next", desc = "Next file" },
+  { on = "r", run = "leave",      desc = "Back to the parent directory" },
+  { on = "t", run = "enter",      desc = "Enter the child directory" },
+
+  { on = "<C-Left>",  run = "leave", desc = "Back to the parent directory" },
+  { on = "<C-Right>", run = "enter", desc = "Enter the child directory" },
+
+  # History (was H/L)
+  { on = "R", run = "back",    desc = "Back to previous directory" },
+  { on = "T", run = "forward", desc = "Forward to next directory" },
+
+  # Seek inside the preview pane (was K/J)
+  { on = "C", run = "seek -5", desc = "Seek up 5 units in the preview" },
+  { on = "S", run = "seek 5",  desc = "Seek down 5 units in the preview" },
+
+  # Rename (was r)
+  { on = "h", run = "rename --cursor=before_ext", desc = "Rename selected file(s)" },
+
+  # Search (was s/S)
+  { on = "j", run = "search --via=fd", desc = "Search files by name via fd" },
+  { on = "J", run = "search --via=rg", desc = "Search files by content via ripgrep" },
+
+  # Vim keys whose jobs moved to the shifted keys above
+  { on = "K", run = "noop", desc = "Disabled: seek up is C" },
+  { on = "H", run = "noop", desc = "Disabled: history back is R" },
+  { on = "L", run = "noop", desc = "Disabled: history forward is T" },
+
+  # Copy (was c)
+  { on = [ "k", "c" ], run = "copy path",             desc = "Copy file path" },
+  { on = [ "k", "C" ], run = "copy url",              desc = "Copy file URL" },
+  { on = [ "k", "d" ], run = "copy dirpath",          desc = "Copy directory path" },
+  { on = [ "k", "D" ], run = "copy dirurl",           desc = "Copy directory URL" },
+  { on = [ "k", "f" ], run = "copy filename",         desc = "Copy filename" },
+  { on = [ "k", "n" ], run = "copy name_without_ext", desc = "Copy filename without extension" },
+
+  # Tabs (was t)
+  { on = [ "l", "t" ], run = "tab_create --current",     desc = "Create a new tab in CWD" },
+  { on = [ "l", "r" ], run = "tab_rename --interactive", desc = "Rename current tab" },
+  { on = "<C-t>",      run = "tab_create --current",     desc = "Create a new tab in CWD" },
+
+  # New window with a shell in the tmux session (like `prefix c`), started in the
+  # hovered folder, or the current one when a file or nothing is hovered.
+  { on = "e", run = '''shell 'd=%h; [ -d "$d" ] || d=$(pwd); tmux new-window -c "$d"' ''', desc = "Open folder in a new tmux window" },
+
+  # Tab switching. Note: tmux and zellij grab Ctrl+PageUp/PageDown, and tmux also
+  # grabs Ctrl+1..9, so those only reach yazi when it runs directly in the terminal.
+  # The unmodified 1..9 and [ / ] work everywhere.
+  { on = "<C-PageUp>",   run = "tab_switch -1 --relative", desc = "Switch to previous tab" },
+  { on = "<C-PageDown>", run = "tab_switch 1 --relative",  desc = "Switch to next tab" },
+
+  { on = "<C-1>", run = "tab_switch 0", desc = "Switch to first tab" },
+  { on = "<C-2>", run = "tab_switch 1", desc = "Switch to second tab" },
+  { on = "<C-3>", run = "tab_switch 2", desc = "Switch to third tab" },
+  { on = "<C-4>", run = "tab_switch 3", desc = "Switch to fourth tab" },
+  { on = "<C-5>", run = "tab_switch 4", desc = "Switch to fifth tab" },
+  { on = "<C-6>", run = "tab_switch 5", desc = "Switch to sixth tab" },
+  { on = "<C-7>", run = "tab_switch 6", desc = "Switch to seventh tab" },
+  { on = "<C-8>", run = "tab_switch 7", desc = "Switch to eighth tab" },
+  { on = "<C-9>", run = "tab_switch 8", desc = "Switch to ninth tab" },
 ]
+
+[tasks]
+prepend_keymap = [
+  { on = "c", run = "arrow prev", desc = "Previous task" },
+  { on = "s", run = "arrow next", desc = "Next task" },
+]
+
+[spot]
+prepend_keymap = [
+  { on = "c", run = "arrow prev", desc = "Previous line" },
+  { on = "s", run = "arrow next", desc = "Next line" },
+  { on = "r", run = "swipe prev", desc = "Swipe to previous file" },
+  { on = "t", run = "swipe next", desc = "Swipe to next file" },
+
+  # Copy (was c)
+  { on = [ "k", "c" ], run = "copy cell", desc = "Copy selected cell" },
+]
+
+[pick]
+prepend_keymap = [
+  { on = "c", run = "arrow prev", desc = "Previous option" },
+  { on = "s", run = "arrow next", desc = "Next option" },
+]
+
+# [help] is intentionally not remapped: its overlay feeds every printable key into
+# the filter box, so navigate the help list with the arrow keys or <C-p>/<C-n>.

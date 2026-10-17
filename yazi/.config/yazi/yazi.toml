@@ -3,3 +3,26 @@
 [[plugin.prepend_previewers]]
 url = "*.md"
 run = 'piper -- CLICOLOR_FORCE=1 glow -w=$w -s=dark "$1"'
+
+[opener]
+# yazi runs in its own terminal, outside tmux, so this adds windows to the tmux
+# session from out here (tmux picks the most recently used session, i.e. "main").
+# Each folder gets its own window, named after it, with cwd set to it and nvim
+# running; the window closes when nvim quits. yazi itself stays open.
+nvim-tmux = [
+  { run = 'for d in %s; do tmux new-window -n "$(basename "$d")" -c "$d" nvim .; done', desc = "nvim in a new tmux window", for = "unix" },
+]
+
+# VS Code as an extra entry in the <S-Enter> (open --interactive) list.
+code = [
+  { run = 'code %s', desc = "Open in VS Code", orphan = true, for = "unix" },
+]
+
+# Rules are first-match-wins, so the folder rule has to be restated in full
+# rather than appended to. <Enter> on a folder uses "nvim-tmux"; "edit" stays in
+# the <S-Enter> list for opening nvim in yazi's own pane.
+[open]
+prepend_rules = [
+  { mime = "folder/*", use = [ "nvim-tmux", "edit", "code", "open", "reveal" ] },
+  { mime = "text/*",   use = [ "edit", "code", "reveal" ] },
+]

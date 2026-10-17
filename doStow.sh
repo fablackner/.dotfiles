@@ -15,7 +15,7 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
-packages=(git tmux zsh vscode mc kde nvim helix ghostty kitty yazi starship zellij htop bin)
+packages=(git tmux zsh vscode mc kde nvim helix zed ghostty kitty yazi starship zellij htop bin restic lazygit)
 backup_root=".stow-adopt-backups/$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$backup_root"
 

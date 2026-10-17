@@ -3,3 +3,12 @@
 [mode]
 normal_main = { fg = "#211421", bg = "#f9db2d", bold = true }
 normal_alt  = { fg = "#f9db2d", bg = "#211421" }
+
+[tabs]
+active   = { fg = "#211421", bg = "#f9db2d", bold = true }
+inactive = { fg = "#c3c0b5", bg = "#211421" }
+
+# Hovered-file indicator. The preview pane's default `underline = true` paints the
+# whole row width, which shows up as a stray line right of the filename.
+[indicator]
+preview = {}

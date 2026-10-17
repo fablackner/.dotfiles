@@ -1,0 +1,54 @@
+# Rebuildable / cache data, excluded from restic-backup
+/home/*/.cache
+/home/*/.local/share/Trash
+/home/*/miniforge3
+/home/*/.julia
+/home/*/.bun
+/home/*/.npm
+/home/*/.gradle
+/home/*/.rustup
+/home/*/.cargo/registry
+/home/*/.cargo/git
+/home/*/.config/nvm
+/home/*/.local/share/uv
+/home/*/.local/share/TabNine
+/home/*/.vscode/extensions
+/home/*/.var/app/*/cache
+/home/*/.config/*/Cache
+/home/*/.config/*/Code Cache
+/home/*/.config/*/GPUCache
+/home/*/.config/*/CachedData
+/home/*/.config/*/CachedExtensionVSIXs
+/home/*/.config/google-chrome/*/Service Worker/CacheStorage
+
+# Reinstallable applications and downloaded binaries
+/home/*/.local/share/claude/versions
+/home/*/.local/share/cursor-agent/versions
+/home/*/.codex/packages
+/home/*/.copilot/pkg
+/home/*/.local/state/.copilot/pkg
+/home/*/.config/discord/app-*
+/home/*/.local/opt
+/home/*/.local/zed.app
+/home/*/.local/bin/*.AppImage
+/home/*/.local/bin/agy
+/home/*/.local/bin/copilot
+/home/*/.local/bin/uv
+/home/*/Android/Sdk
+/home/*/.Mathematica/Paclets/Repository
+/home/*/.continue/index
+/home/*/projects/cProjects/orca_*_linux_*
+/home/*/projects/cProjects/psi4conda
+
+# Build output and dependencies inside projects
+node_modules
+.venv
+__pycache__
+.gradle
+/home/*/projects/**/target
+/home/*/projects/**/build
+/home/*/projects/**/dist
+/home/*/projects/**/.next
+
+# Anything put here stays local and is not uploaded
+/home/*/skipBackup

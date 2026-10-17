@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+# Back up $HOME to Google Drive with restic (through rclone).
+#   restic-backup          run a backup (what the systemd timer does)
+#   restic-backup <args>   run any restic command against the repo,
+#                          e.g. `restic-backup snapshots` or `restic-backup mount ~/mnt`
+set -euo pipefail
+
+export RESTIC_REPOSITORY="${RESTIC_REPOSITORY:-rclone:gdrive:restic-backup}"
+export RESTIC_PASSWORD_FILE="${RESTIC_PASSWORD_FILE:-$HOME/.local/share/restic/password}"
+
+if [[ $# -gt 0 ]]; then
+  exec restic "$@"
+fi
+
+# Package lists ride along in the backup so a fresh install can replay them.
+lists="$HOME/.local/share/restic/system"
+mkdir -p "$lists"
+zypper -q pa --userinstalled | awk -F'|' 'NR>2{gsub(/ /,"",$3);print $3}' | sort -u > "$lists/zypper-userinstalled.txt"
+zypper -q lr -u > "$lists/zypper-repos.txt"
+command -v flatpak >/dev/null && flatpak list --app --columns=application > "$lists/flatpaks.txt"
+
+restic backup "$HOME" \
+  --exclude-file "$HOME/.config/restic/excludes" \
+  --exclude-caches \
+  --tag auto
+
+# Thin out old snapshots and verify the repo once a week (Sunday).
+if [[ $(date +%u) == 7 ]]; then
+  restic forget --tag auto --keep-daily 7 --keep-weekly 5 --keep-monthly 12 --keep-yearly 3 --prune
+  restic check --read-data-subset=5%
+fi
