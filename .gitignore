@@ -1,3 +1,4 @@
 mc/.config/mc/ini
 .stow-adopt-backups/
 *.bak
+nvim/.config/nvim/lazyvim.json

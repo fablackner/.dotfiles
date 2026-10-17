@@ -74,7 +74,7 @@ install_bun() {
   local bun_install_dir="$HOME/.bun"
 
   if [[ ! -x "$bun_install_dir/bin/bun" ]]; then
-    curl -fsSL https://bun.com/install | bash || return
+    curl -fsSL https://bun.com/install | SHELL=/bin/sh bash || return
   fi
 
   export BUN_INSTALL="$bun_install_dir"

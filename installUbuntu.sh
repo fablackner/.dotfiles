@@ -35,14 +35,9 @@ BREW_PACKAGES=(
 
 run_step "Brew Packages (Bulk)" /home/linuxbrew/.linuxbrew/bin/brew install -q "${BREW_PACKAGES[@]}"
 
-if [[ -f "$(brew --prefix)/opt/fzf/install" ]]; then
-  "$(brew --prefix)/opt/fzf/install" --all --no-bash --no-fish >/dev/null 2>&1
-fi
-
 # ---------------------------------------------------------
 # CONFIGURATION & DOTFILES
 # ---------------------------------------------------------
-ensure_path_in_file "$HOME/.zshrc" "$HOME/.local/bin"
 ensure_path_in_file "$HOME/.bashrc" "$HOME/.local/bin"
 
 run_step "uv" install_uv
