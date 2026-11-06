@@ -3,15 +3,8 @@ update_info=kwinrules.upd:replace-placement-string-to-enum,kwinrules.upd:use-vir
 
 [75f397d4-b93b-46e2-9a59-49a716cbc69c]
 Description=noBorders
-noborder=true
-noborderrule=3
+decorationpolicy=none
+decorationpolicyrule=3
 
 [General]
-count=1
-rules=75f397d4-b93b-46e2-9a59-49a716cbc69c
-
-[b66c0b16-0637-48de-a1f5-a2bc8240862b]
-Description=.*
-noborder=true
-noborderrule=4
-wmclassmatch=3
+Order=75f397d4-b93b-46e2-9a59-49a716cbc69c
