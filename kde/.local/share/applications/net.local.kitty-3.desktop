@@ -1,6 +1,6 @@
 [Desktop Entry]
-Exec=google-chrome --new-window https://claude.ai/new
-Name=claude
+Exec=kitty
+Name=kitty
 NoDisplay=true
 StartupNotify=false
 Type=Application
