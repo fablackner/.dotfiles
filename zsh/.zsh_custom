@@ -52,7 +52,7 @@ alias sm="kwin_wayland_wrapper --xwayland"
 # Utilities
 alias e="gedit"
 alias lg="lazygit"
-alias tt="gio trash"
+alias trash="gio trash"
 alias xc="xclip -selection clipboard"
 alias myvpn='sudo wg-quick up wg0'
 alias mc="COLORTERM=truecolor mc -S faybtheme"
