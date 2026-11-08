@@ -99,5 +99,7 @@
   "editor.formatOnSave": true,
   "redhat.telemetry.enabled": false,
   "claudeCode.preferredLocation": "panel",
-  "claudeCode.hideOnboarding": true
+  "claudeCode.hideOnboarding": true,
+  "intellij.region": "europe",
+  "intellij.dataSharing": "none"
 }
