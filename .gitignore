@@ -2,3 +2,4 @@ mc/.config/mc/ini
 .stow-adopt-backups/
 *.bak
 nvim/.config/nvim/lazyvim.json
+gnome/.local/share/gnome-shell/extensions/*/schemas/gschemas.compiled

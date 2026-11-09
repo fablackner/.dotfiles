@@ -110,3 +110,40 @@ install_jetbrainsmono() {
   fc-cache -f "$HOME/.local/share/fonts"
   rm -rf "$temp_dir"
 }
+
+# Microsoft's deb822 layout. The code package writes this same file itself,
+# so a differently named .list with another Signed-By path would make apt fail.
+install_vscode_apt() {
+  local keyring=/usr/share/keyrings/microsoft.gpg
+  curl -fsSL https://packages.microsoft.com/keys/microsoft.asc \
+    | gpg --dearmor | sudo install -D -m 644 /dev/stdin "$keyring" || return
+  sudo rm -f /etc/apt/sources.list.d/vscode.list
+  sudo tee /etc/apt/sources.list.d/vscode.sources >/dev/null <<SRC || return
+Types: deb
+URIs: https://packages.microsoft.com/repos/code
+Suites: stable
+Components: main
+Architectures: amd64,arm64,armhf
+Signed-By: $keyring
+SRC
+  echo "code code/add-microsoft-repo boolean true" | sudo debconf-set-selections
+  sudo apt-get update -qq || return
+  sudo DEBIAN_FRONTEND=noninteractive apt-get install -y -qq code >/dev/null
+}
+
+# keyd is not packaged for Ubuntu 24.04. Installs the binary, the systemd unit
+# and keyd/default.conf, but does not enable the service.
+install_keyd() {
+  local config_src
+  config_src="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)/keyd/default.conf"
+  if ! command -v keyd >/dev/null 2>&1; then
+    local temp_dir
+    temp_dir="$(mktemp -d)"
+    git -c advice.detachedHead=false clone -q --depth 1 --branch v2.5.0 https://github.com/rvaiya/keyd "$temp_dir/keyd" || return
+    make -s -C "$temp_dir/keyd" >/dev/null 2>&1 || return
+    sudo make -s -C "$temp_dir/keyd" install >/dev/null || return
+    rm -rf "$temp_dir"
+    sudo systemctl daemon-reload || true
+  fi
+  sudo install -D -m 644 "$config_src" /etc/keyd/default.conf
+}

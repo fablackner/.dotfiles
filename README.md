@@ -46,6 +46,32 @@ Install with:
 ./doStow.sh
 ```
 
+## Ubuntu 24.04 desktop (GNOME with the KDE setup's behaviour)
+
+On a fresh Ubuntu 24.04:
+```
+sudo apt install -y git
+git clone https://github.com/fablackner/.dotfiles ~/.dotfiles && cd ~/.dotfiles
+./installUbuntu.sh
+./doStow.sh
+./configureGnome.sh
+```
+Then log out and back in. `installUbuntu.sh` also installs VS Code and keyd (built from source, config in `keyd/default.conf`, not started at boot).
+
+`configureGnome.sh` carries the KWin setup over to GNOME: 12 static desktops, the shortcuts from `kglobalshortcutsrc`, launchers, no titlebar buttons, an auto-hiding dock on the left, night light and the `de nodeadkeys` layout the shortcuts were recorded with. The `faydesk@fablackner` extension (stowed from `gnome/`) adds what GNOME lacks:
+
+| Shortcut | Action |
+|---|---|
+| Meta+A / Meta+G | tile left / right half |
+| Meta+Q / B / Z / X | tile top-left / top-right / bottom-left / bottom-right |
+| Meta+R / T / C / S | focus window left / right / up / down |
+| Meta+Ctrl+Left/Right | previous / next desktop, wrapping around |
+| Meta+Ctrl+Esc | kill window |
+
+It also opens new windows maximized, dims unfocused windows by 10%, switches desktops without animation and removes Mutter titlebars from X11 windows. Settings live under `org.gnome.shell.extensions.faydesk` (e.g. `gsettings set org.gnome.shell.extensions.faydesk tile-gap 0`).
+
+Handled by GNOME directly: Meta+1..9 and Meta+Alt+0/1/2 switch desktops, the window-to-desktop keys from KDE, Meta+P maximize, Meta+W minimize, Meta+F fullscreen, Alt+F4, Alt+Tab, Meta+L lock, Alt+Space search.
+
 Update neovim with:
 ```
 ./updateNeovim.sh

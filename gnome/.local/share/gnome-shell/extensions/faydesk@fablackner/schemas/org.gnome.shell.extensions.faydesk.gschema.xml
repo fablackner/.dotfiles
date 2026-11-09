@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Defaults mirror kde/.config/kglobalshortcutsrc (German nodeadkeys layout). -->
+<schemalist>
+  <schema id="org.gnome.shell.extensions.faydesk" path="/org/gnome/shell/extensions/faydesk/">
+
+    <!-- Quick tiling (KWin "Window Quick Tile ...") -->
+    <key name="tile-left" type="as"><default><![CDATA[['<Super>a']]]></default></key>
+    <key name="tile-right" type="as"><default><![CDATA[['<Super>g']]]></default></key>
+    <key name="tile-top" type="as"><default>[]</default></key>
+    <key name="tile-bottom" type="as"><default>[]</default></key>
+    <key name="tile-top-left" type="as"><default><![CDATA[['<Super>q']]]></default></key>
+    <key name="tile-top-right" type="as"><default><![CDATA[['<Super>b']]]></default></key>
+    <key name="tile-bottom-left" type="as"><default><![CDATA[['<Super>z']]]></default></key>
+    <key name="tile-bottom-right" type="as"><default><![CDATA[['<Super>x']]]></default></key>
+
+    <!-- Directional focus (KWin "Switch Window Left/Right/Up/Down") -->
+    <key name="focus-left" type="as"><default><![CDATA[['<Super>r']]]></default></key>
+    <key name="focus-right" type="as"><default><![CDATA[['<Super>t']]]></default></key>
+    <key name="focus-up" type="as"><default><![CDATA[['<Super>c']]]></default></key>
+    <key name="focus-down" type="as"><default><![CDATA[['<Super>s']]]></default></key>
+
+    <!-- Desktop switching that wraps around (KWin RollOverDesktops=true) -->
+    <key name="workspace-left" type="as"><default><![CDATA[['<Control><Super>Left']]]></default></key>
+    <key name="workspace-right" type="as"><default><![CDATA[['<Control><Super>Right']]]></default></key>
+
+    <!-- KWin "Kill Window" -->
+    <key name="kill-window" type="as"><default><![CDATA[['<Control><Super>Escape']]]></default></key>
+
+    <key name="tile-gap" type="i">
+      <default>4</default>
+      <summary>Gap in pixels around tiled windows</summary>
+    </key>
+    <key name="maximize-new-windows" type="b">
+      <default>true</default>
+      <summary>Open new windows maximized (KWin Placement=Maximizing)</summary>
+    </key>
+    <key name="dim-inactive" type="d">
+      <default>0.1</default>
+      <summary>Darken unfocused windows by this fraction, 0 disables (KWin diminactive)</summary>
+    </key>
+    <key name="instant-workspace-switch" type="b">
+      <default>true</default>
+      <summary>Switch desktops without the slide animation</summary>
+    </key>
+    <key name="undecorate-x11" type="b">
+      <default>true</default>
+      <summary>Remove Mutter titlebars and borders from X11 windows</summary>
+    </key>
+  </schema>
+</schemalist>

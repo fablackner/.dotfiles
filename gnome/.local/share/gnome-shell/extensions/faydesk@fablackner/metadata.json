@@ -1,0 +1,8 @@
+{
+  "uuid": "faydesk@fablackner",
+  "name": "Fay Desktop",
+  "description": "KWin-style window management for GNOME: quick tiling with quarters, directional focus, wrapping desktop switching, kill window, maximize new windows, dim inactive windows, instant desktop switching and no titlebars on X11 windows.",
+  "shell-version": ["46", "47", "48"],
+  "settings-schema": "org.gnome.shell.extensions.faydesk",
+  "url": "https://github.com/fablackner/.dotfiles"
+}

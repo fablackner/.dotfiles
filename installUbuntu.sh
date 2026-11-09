@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+# Desktop setup for a fresh Ubuntu 24.04 (GNOME). Afterwards run:
+#   ./doStow.sh && ./configureGnome.sh   # then log out and back in
 set -euo pipefail
 
 source "$(dirname "$0")/installUtility.sh"
@@ -10,15 +12,24 @@ if [[ "${EUID}" -eq 0 ]]; then
   exit 1
 fi
 
+source /etc/os-release
+if [[ "${ID:-}" != "ubuntu" || "${VERSION_ID:-}" != "24.04" ]]; then
+  echo "Warning: written for Ubuntu 24.04, this is ${PRETTY_NAME:-unknown}."
+fi
+
+export DEBIAN_FRONTEND=noninteractive
+
 # ---------------------------------------------------------
 # APT: Core Dependencies & System/GUI Tools
 # ---------------------------------------------------------
 sudo apt-get update -qq
 
 APT_PACKAGES=(
-  build-essential bubblewrap git curl gnupg ca-certificates fontconfig unzip
-  wl-clipboard xclip xsel ghostty flameshot meld kdiff3 ffmpeg zsh
+  build-essential bubblewrap git curl wget gnupg ca-certificates fontconfig unzip
+  procps file
+  wl-clipboard xclip xsel xdotool x11-utils flameshot meld kdiff3 ffmpeg zsh
   imagemagick poppler-utils tmux mc htop jq stow httpie 7zip
+  gnome-tweaks gnome-shell-extension-prefs libglib2.0-bin python3
 )
 
 run_step "Sys Packages (Bulk)" sudo apt-get install -y -qq "${APT_PACKAGES[@]}" >/dev/null
@@ -29,7 +40,7 @@ run_step "Sys Packages (Bulk)" sudo apt-get install -y -qq "${APT_PACKAGES[@]}" 
 run_step "Homebrew System" install_homebrew
 
 BREW_PACKAGES=(
-  bat btop duf dust eza fd fzf gh glow lazydocker lazygit
+  bat btop duf dust eza fd fzf gh git-delta glow lazydocker lazygit
   neovim resvg ripgrep starship yazi zellij zoxide
 )
 
@@ -58,16 +69,21 @@ sync_repo "$HOME/.tmux/plugins/tpm" "https://github.com/tmux-plugins/tpm"
 
 record_installed "Zsh & Tmux Plugins"
 
+if [[ "$(getent passwd "$USER" | cut -d: -f7)" != "$(command -v zsh)" ]]; then
+  run_step "Default shell zsh" sudo chsh -s "$(command -v zsh)" "$USER"
+fi
+
 # ---------------------------------------------------------
-# VSCODE: Custom APT Source
+# VSCODE: Microsoft APT repository
 # ---------------------------------------------------------
 if ! command -v code >/dev/null 2>&1; then
-  if [[ ! -f /etc/apt/sources.list.d/vscode.list ]]; then
-    sudo install -m 0755 -d /etc/apt/keyrings
-    curl -fsSL https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor | sudo tee /etc/apt/keyrings/packages.microsoft.gpg >/dev/null
-    echo "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/packages.microsoft.gpg] https://packages.microsoft.com/repos/code stable main" \
-      | sudo tee /etc/apt/sources.list.d/vscode.list >/dev/null
-    sudo apt-get update -qq
-  fi
-  run_step "VSCode" sudo apt-get install -y -qq code >/dev/null
+  run_step "VSCode" install_vscode_apt
 fi
+
+# ---------------------------------------------------------
+# KEYD: same remapping as on the KDE machine (not started at boot;
+# Meta+Backspace / Meta+Esc start and stop it, see configureGnome.sh)
+# ---------------------------------------------------------
+run_step "keyd" install_keyd
+
+printf '\nNext: ./doStow.sh && ./configureGnome.sh, then log out and back in.\n'

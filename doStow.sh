@@ -15,7 +15,11 @@ if [[ -n "$(git status --porcelain)" ]]; then
   exit 1
 fi
 
-packages=(git tmux zsh vscode mc kde nvim helix zed ghostty kitty yazi starship zellij htop bin restic lazygit)
+packages=(git tmux zsh vscode mc kde gnome nvim helix zed ghostty kitty yazi starship zellij htop bin restic lazygit)
+
+# Shared directories other programs write to: make them real directories so
+# stow links the files inside instead of folding the whole directory.
+mkdir -p "$HOME/.local/share/applications" "$HOME/.local/share/gnome-shell/extensions"
 backup_root=".stow-adopt-backups/$(date +%Y%m%d-%H%M%S)"
 mkdir -p "$backup_root"
 
