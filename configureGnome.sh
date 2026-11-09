@@ -153,12 +153,16 @@ gset org.gnome.desktop.input-sources sources "[('xkb', 'de+nodeadkeys')]"
 # On de-nodeadkeys: " = Shift+2, ! = Shift+1, § = Shift+3, $ = Shift+4,
 # & = Shift+6, / = Shift+7. GNOME stores the unshifted key plus Shift.
 # Desktop files live in kde/.local/share/applications (stowed by doStow.sh).
+# The GNOME session PATH has neither ~/.local/bin nor Homebrew, so kitty is
+# called by its full path and tmux/yazi run in an interactive zsh (.zshrc
+# sets up brew). The KDE desktop files hardcode /home/fabian, so avoid them.
+KITTY="$HOME/.local/kitty.app/bin/kitty"
 LAUNCHERS=(
   "VS Code|code|<Shift><Super>2"
   "Chrome|google-chrome|<Shift><Super>1"
-  "Kitty tmux|gtk-launch net.local.kitty|<Shift><Super>3"
-  "Yazi|gtk-launch net.local.kitty-2|<Shift><Super>4"
-  "Kitty|gtk-launch net.local.kitty-3|<Shift><Super>7"
+  "Kitty tmux|$KITTY zsh -ic 'tmux new-session -A -s main'|<Shift><Super>3"
+  "Yazi|$KITTY zsh -ic yazi|<Shift><Super>4"
+  "Kitty|$KITTY|<Shift><Super>7"
   "Files|nautilus --new-window|<Shift><Super>6"
   "Screenshot|flameshot gui|<Control><Alt>h"
   "Shutdown|gtk-launch sudo-2|<Control><Alt><Super>h"
