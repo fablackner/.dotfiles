@@ -30,7 +30,7 @@ sudo apt-get update -qq
 # ships with Ubuntu desktop.
 APT_PACKAGES=(
   git curl build-essential
-  xclip xsel zsh tmux stow flameshot
+  xclip xsel zsh stow flameshot
   gnome-tweaks gnome-shell-extension-prefs
 )
 
@@ -43,7 +43,7 @@ run_step "Homebrew System" install_homebrew
 
 BREW_PACKAGES=(
   bat btop duf dust eza fd fzf gh git-delta glow lazydocker lazygit
-  neovim resvg ripgrep starship yazi zoxide
+  neovim resvg ripgrep starship tmux yazi zoxide
 )
 
 run_step "Brew Packages (Bulk)" /home/linuxbrew/.linuxbrew/bin/brew install -q "${BREW_PACKAGES[@]}"

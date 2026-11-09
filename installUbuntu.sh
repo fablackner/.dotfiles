@@ -28,7 +28,7 @@ APT_PACKAGES=(
   build-essential bubblewrap git curl wget gnupg ca-certificates fontconfig unzip
   procps file
   wl-clipboard xclip xsel xdotool x11-utils flameshot meld kdiff3 ffmpeg zsh
-  imagemagick poppler-utils tmux mc htop jq stow httpie 7zip
+  imagemagick poppler-utils mc htop jq stow httpie 7zip
   gnome-tweaks gnome-shell-extension-prefs libglib2.0-bin python3
 )
 
@@ -41,7 +41,7 @@ run_step "Homebrew System" install_homebrew
 
 BREW_PACKAGES=(
   bat btop duf dust eza fd fzf gh git-delta glow lazydocker lazygit
-  neovim resvg ripgrep starship yazi zellij zoxide
+  neovim resvg ripgrep starship tmux yazi zellij zoxide
 )
 
 run_step "Brew Packages (Bulk)" /home/linuxbrew/.linuxbrew/bin/brew install -q "${BREW_PACKAGES[@]}"

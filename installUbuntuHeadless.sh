@@ -17,7 +17,7 @@ sudo apt-get update -qq
 
 APT_PACKAGES=(
   build-essential bubblewrap git curl gnupg ca-certificates unzip
-  ffmpeg zsh imagemagick poppler-utils tmux mc htop jq stow httpie 7zip
+  ffmpeg zsh imagemagick poppler-utils mc htop jq stow httpie 7zip
 )
 
 run_step "Sys Packages (Bulk)" sudo apt-get install -y -qq "${APT_PACKAGES[@]}" >/dev/null
@@ -29,7 +29,7 @@ run_step "Homebrew System" install_homebrew
 
 BREW_PACKAGES=(
   bat btop duf dust eza fd fzf gh git-delta glow lazydocker lazygit
-  neovim resvg ripgrep starship yazi zellij zoxide
+  neovim resvg ripgrep starship tmux yazi zellij zoxide
 )
 
 run_step "Brew Packages (Bulk)" /home/linuxbrew/.linuxbrew/bin/brew install -q "${BREW_PACKAGES[@]}"
