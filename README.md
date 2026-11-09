@@ -52,11 +52,11 @@ On a fresh Ubuntu 24.04:
 ```
 sudo apt install -y git
 git clone https://github.com/fablackner/.dotfiles ~/.dotfiles && cd ~/.dotfiles
-./installUbuntu.sh
+./installUbuntu.sh      # or ./installUbuntuMin.sh
 ./doStow.sh
 ./configureGnome.sh
 ```
-Then log out and back in. `installUbuntu.sh` also installs VS Code and keyd (built from source, config in `keyd/default.conf`, not started at boot).
+Then log out and back in. Both scripts install VS Code and keyd (built from source, config in `keyd/default.conf`, not started at boot). `installUbuntuMin.sh` leaves out uv, Bun, zellij and most apt tools (ffmpeg, imagemagick, mc, htop, meld, kdiff3, ...).
 
 `configureGnome.sh` carries the KWin setup over to GNOME: 12 static desktops, the shortcuts from `kglobalshortcutsrc`, launchers, no titlebar buttons, an auto-hiding dock on the left, night light and the `de nodeadkeys` layout the shortcuts were recorded with. The `faydesk@fablackner` extension (stowed from `gnome/`) adds what GNOME lacks:
 
